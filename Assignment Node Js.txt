@@ -1,0 +1,128 @@
+//1
+const http = require("http");
+const server = http.createServer((req, res) => {
+	console.log("Request Made");
+});
+
+server.listen(3000, "localhost", () => {
+	console.log("Success : I'm listening from port 3000");
+});
+
+
+//2
+const fs = require("fs");
+fs.readFile("./docs/test.txt", (err, data) => {
+	if (err) {
+		console.log(err);
+	} else {
+		console.log(data.toString());
+	}
+});
+
+
+//3
+const directory = "./";
+const path = require("path");
+const fs = require("fs");
+
+fs.readdir(directory, (err, files) => {
+	files.forEach((file) => {
+		if (fs.lstatSync(path.resolve(directory, file)).isDirectory()) {
+			console.log("Directory: " + file);
+		} else {
+			console.log("File: " + file);
+		}
+	});
+});
+
+//4
+const fs = require("fs");
+fs.writeFile("./docs/myblog.txt", `"Hey ho! let's go"`, () => {
+	console.log("The file was saved!");
+});
+
+
+//6
+
+//1
+//calculator.js
+function calAdd(a, b) {
+	return a + b;
+}
+
+function calMul(a, b) {
+	return a * b;
+}
+let c = 3;
+let d = 7;
+let addition = calAdd(c, d);
+let multiplication = calMul(c, d);
+module.exports = { c, d, addition, multiplication };
+
+
+//app.js
+const o = require("./calculator.js");
+console.log(`The sum of ${o.c} & ${o.d} is ${o.addition}`);
+console.log(`The multiplication of ${o.c} & ${o.d} is ${o.multiplication}`);
+
+//3
+//calculator.js(same as above)
+//app.js
+const o = require("./calculator.js");
+const moment = require("moment");
+console.log(moment().format("dddd,MMMM Do YYYY, h:mm:ss a"));
+console.log(`The sum of ${o.c} & ${o.d} is ${o.addition}`);
+console.log(`The multiplication of ${o.c} & ${o.d} is ${o.multiplication}`);
+
+//7
+var strftime = require("strftime");
+console.log(strftime("%I"));
+
+//8
+const fs = require("fs");
+const prompt = require("prompt-sync")({ sigint: true });
+const num = prompt("Enter a number : ");
+let sum = 0;
+for (i = 1; i <= num; i++) {
+	sum += i;
+}
+//console.log(`The sum of all integers is ${sum}`);
+fs.writeFile("./docs/demo.txt", `The sum of all integers is ${sum}`, () => {
+	console.log("File has been updated with the required sum");
+});
+
+//10
+const fs = require("fs");
+fs.writeFile("./docs/myblog.txt", `"Hey ho! let's go"`, () => {
+	console.log("The file was saved!");
+});
+
+//extra part
+const fs = require("fs");	
+
+fs.renameSync("./docs/myblog.txt", "./docs/blogs.txt");
+console.log("File Renamed.");
+
+
+//more extra part
+const fs = require("fs");
+fs.writeFile("./docs/myblog.txt", `It's a long way to the top....`, () => {
+	console.log("The file was saved!");
+});
+fs.readFile("./docs/myblog.txt", { encoding: "utf8" }, (err, data) => {
+	if (err) throw err;
+	else {
+		console.log(data);
+	}
+});
+
+//12
+const moment = require("moment"); //using moment
+const strftime = require("strftime"); //using strftime
+console.log(moment().format());
+console.log(strftime("%c"));
+
+//13
+console.log(process.argv);
+var myname = process.argv.slice(2);
+console.log(`${myname} hello, ${myname}`);
